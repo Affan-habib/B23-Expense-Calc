@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  Image,
-  PermissionsAndroid,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  View,
-  StyleSheet,
-} from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 import { globalStyles, colors } from "../styles/globalStyles";
-import { useIsFocused } from "@react-navigation/native";
 // import { useToast } from "react-native-toast-notifications";
 import Button from "../components/Button";
 import Card from "../components/Card";
 
 const Expenses = (props) => {
-  const isFocused = useIsFocused();
+  const expenses = useSelector((state) => state.expenses);
 
   return (
     <ScrollView style={styles.container}>
@@ -51,7 +42,7 @@ const Expenses = (props) => {
             body="Hello bodyrem30Hello body lorem30Hello body lorem30"
           />
         </Card>
-      <Button title="photos" onPress={() => navigation.navigate('Gallery')}/>
+        <Button title="photos" onPress={() => navigation.navigate("Gallery")} />
       </View>
     </ScrollView>
   );
