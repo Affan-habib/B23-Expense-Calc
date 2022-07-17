@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../reducers/expensesSlice";
 import { colors } from "../styles/Colors";
 import Button from "../components/Button";
-import { color } from "react-native-reanimated";
 export default function AddExpense() {
   const dispatch = useDispatch();
 
@@ -124,9 +123,7 @@ export default function AddExpense() {
               </View>
 
               <Button
-                color="#00669a"
                 title="Save"
-                disabled={!isValid}
                 onPress={handleSubmit}
               />
             </View>

@@ -17,6 +17,7 @@ import { store } from "./src/reducers/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import Home from "./src/screens/Home";
+import Datepicker from './src/components/Datepicker'
 let persistor = persistStore(store);
 const Tab = createBottomTabNavigator();
 function CustomDrawerContent(props) {
@@ -39,6 +40,7 @@ function MyDrawer() {
       <Drawer.Screen name="Expenses" component={Expenses} />
       <Drawer.Screen name="Categories" component={AddCategory} />
       <Drawer.Screen name="AddExpense" component={AddExpense} />
+      <Drawer.Screen name="Datepicker" component={Datepicker} />
     </Drawer.Navigator>
   );
 }
