@@ -13,7 +13,8 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../reducers/expensesSlice";
 import { colors } from "../styles/Colors";
-import Button from "../components/Button"
+import Button from "../components/Button";
+import { color } from "react-native-reanimated";
 export default function AddExpense() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
@@ -33,7 +34,7 @@ export default function AddExpense() {
           initialValues={{
             title: "",
             cost: "",
-            category: "",
+            category: "Food",
             date: "20/54",
           }}
           onSubmit={(values, actions) => {
@@ -58,45 +59,69 @@ export default function AddExpense() {
             setFieldValue,
           }) => (
             <View>
-              <TextInput
-                value={values.title}
-                style={styles.customCss}
-                onBlur={() => setFieldTouched("title")}
-                onChangeText={handleChange("title")}
-                placeholder="Expense Title"
-              />
-              {touched.title && errors.title && (
-                <Text style={{ fontSize: 14, color: colors.info, marginBottom: 15 }}>
-                  {errors.title}
+              <View>
+                <Text style={{ fontSize: 16, marginBottom: 10 }}>
+                  Category of Cost
                 </Text>
-              )}
-              <TextInput
-                value={values.cost}
-                style={styles.customCss}
-                onBlur={() => setFieldTouched("cost")}
-                onChangeText={handleChange("cost")}
-                keyboardType="numeric"
-                placeholder="Enter your cost"
-              />
-              {touched.cost && errors.cost && (
-                <Text style={{ fontSize: 14, color: colors.info }}>
-                  {errors.cost}
-                </Text>
-              )}
-              <Picker
-                ref={pickerRef}
-                selectedValue={values.category}
-                mode="dropdown"
-                style={styles.customCss}
-                onValueChange={(itemValue, itemIndex) =>
-                  setFieldValue("category", itemValue)
-                }
-                placeholder="Select Category"
-              >
-                {categories.map((c, index) => (
-                  <Picker.Item key={index} label={c} value={c} />
-                ))}
-              </Picker>
+                <Picker
+                  ref={pickerRef}
+                  selectedValue={values.category}
+                  mode="dropdown"
+                  style={styles.picker}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setFieldValue("category", itemValue)
+                  }
+                  placeholder="Select Category"
+                >
+                  {categories.map((c, index) => (
+                    <Picker.Item key={index} label={c} value={c} />
+                  ))}
+                </Picker>
+              </View>
+              <View>
+                <Text style={{ fontSize: 16, marginBottom: 10 }}>Title</Text>
+                <TextInput
+                  value={values.title}
+                  style={styles.inputBox}
+                  onBlur={() => setFieldTouched("title")}
+                  onChangeText={handleChange("title")}
+                  placeholder="Expense Title"
+                />
+                {touched.title && errors.title && (
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: colors.primary,
+                      marginBottom: 15,
+                    }}
+                  >
+                    {errors.title}
+                  </Text>
+                )}
+              </View>
+              <View>
+                <Text style={{ fontSize: 16, marginBottom: 10 }}>Cost</Text>
+                <TextInput
+                  value={values.cost}
+                  style={styles.inputBox}
+                  onBlur={() => setFieldTouched("cost")}
+                  onChangeText={handleChange("cost")}
+                  keyboardType="numeric"
+                  placeholder="Enter your cost"
+                />
+                {touched.cost && errors.cost && (
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: colors.primary,
+                      marginBottom: 15,
+                    }}
+                  >
+                    {errors.cost}
+                  </Text>
+                )}
+              </View>
+
               <Button
                 color="#00669a"
                 title="Save"
@@ -112,15 +137,22 @@ export default function AddExpense() {
 }
 
 const styles = StyleSheet.create({
-  customCss: {
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 12,
-    borderColor: "#cccccc",
-  },
   mainWrapper: {
-    padding: 40,
+    padding: 20,
     backgroundColor: colors.secondary,
-    flex: 1
+    flex: 1,
+  },
+  inputBox: {
+    padding: 10,
+    borderColor: colors.primary,
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+  picker: {
+    padding: 10,
+    borderWidth: 1,
+    marginBottom: 20,
+    backgroundColor: colors.info,
+    color: "white",
   },
 });

@@ -1,17 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let nextExpenseId = 40;
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
 
 const expensesSlice = createSlice({
   name: "expenses",
-  initialState: [],
+  initialState: [{title: "hidai",date: "hidai",cost: "hidai"}],
   reducers: {
     addExpense(state, action) {
       state.push({
-        id: new Date(),
+        // id: new Date(),
         title: action.payload.title,
         cost: parseInt(action.payload.cost),
-        date: action.payload.date,
+        date: today,
         category: action.payload.category,
       });
     },

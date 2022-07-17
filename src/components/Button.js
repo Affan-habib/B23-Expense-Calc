@@ -20,11 +20,9 @@ const Button = (props) => {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 2,
-    // paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     justifyContent: "center",
     alignItems: "center",
-    margin: 10,
     height: 50
   },
   title: {

@@ -22,7 +22,7 @@ export default function AddCategory() {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={{backgroundColor: colors.secondary, flex: 1}}>
+      <View style={{backgroundColor: colors.secondary, flex: 1, padding: 20}}>
         <Formik
           initialValues={{
             name: "",
@@ -45,8 +45,8 @@ export default function AddCategory() {
             handleSubmit,
           }) => (
             <View>
-              <Text style={{ fontSize: 18, marginBottom: 10 }}>
-                Add a new category for expense
+              <Text style={{ fontSize: 16, marginBottom: 10 }}>
+                Add Category
               </Text>
               <TextInput
                 value={values.name}
@@ -56,12 +56,11 @@ export default function AddCategory() {
                 placeholder="Category Name"
               />
               {touched.name && errors.name && (
-                <Text style={{ fontSize: 14, color: colors.info }}>
+                <Text style={{ fontSize: 14, color: colors.info, marginBottom: 10 }}>
                   {errors.name}
                 </Text>
               )}
               <Button
-                color="#00669a"
                 title="Save"
                 disabled={!isValid}
                 onPress={handleSubmit}
