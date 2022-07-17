@@ -17,6 +17,7 @@ import Button from "../components/Button";
 import { color } from "react-native-reanimated";
 export default function AddExpense() {
   const dispatch = useDispatch();
+
   const categories = useSelector((state) => state.categories);
   const pickerRef = useRef();
 
@@ -91,7 +92,7 @@ export default function AddExpense() {
                   <Text
                     style={{
                       fontSize: 14,
-                      color: colors.primary,
+                      color: colors.danger,
                       marginBottom: 15,
                     }}
                   >
@@ -113,7 +114,7 @@ export default function AddExpense() {
                   <Text
                     style={{
                       fontSize: 14,
-                      color: colors.primary,
+                      color: colors.danger,
                       marginBottom: 15,
                     }}
                   >
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     borderWidth: 1,
     marginBottom: 10,
+    backgroundColor: "white",
   },
   picker: {
     padding: 10,
