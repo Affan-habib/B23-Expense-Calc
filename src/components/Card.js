@@ -1,6 +1,7 @@
 import React from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { colors } from "../styles/Colors";
+import IconButton from "./IconButton";
 
 const Card = (props) => {
   return (
@@ -13,9 +14,18 @@ const Card = (props) => {
       >
         {props.title}
       </Text>
-      <Text style={styles.body}>{props.category}</Text>
-      <Text style={styles.body}>{props.date}</Text>
-      <Text style={styles.body}>{props.cost}</Text>
+      <View style={{flexDirection: "row"}}>
+        <IconButton name="attach-money" color={colors.info}/>
+        <Text style={styles.body}>{props.cost  || "Not found"}</Text>
+      </View>
+      <View style={{flexDirection: "row"}}>
+        <IconButton name="category" color={colors.info}/>
+        <Text style={styles.body}>{props.category || "Not found"} </Text>
+      </View>
+      <View style={{flexDirection: "row"}}>
+        <IconButton name="date-range" color={colors.info}/>
+        <Text style={styles.body}>{props.date  || "Not found"}</Text>
+      </View>
     </View>
   );
 };
@@ -25,7 +35,7 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     margin: 10,
     backgroundColor: "#F9F9F9",
-    flex:1/2,
+    flex: 1 / 2,
   },
   title: {
     fontSize: 16,
@@ -35,8 +45,7 @@ const styles = StyleSheet.create({
   },
   body: {
     margin: 5,
-    fontSize: 14,
-    color: colors.pr
+    fontSize: 16,
   },
 });
 

@@ -9,11 +9,11 @@ today = mm + '/' + dd + '/' + yyyy;
 
 const expensesSlice = createSlice({
   name: "expenses",
-  initialState: [{title: "hidai",date: "hidai",cost: "hidai"}],
+  initialState: [],
   reducers: {
     addExpense(state, action) {
       state.push({
-        // id: new Date(),
+        id: new Date(),
         title: action.payload.title,
         cost: parseInt(action.payload.cost),
         date: today,

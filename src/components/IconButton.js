@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const IconButton = props => {
   return (
-    <TouchableOpacity style={styles.button} onPress={props.onPressFunction}>
+    <TouchableOpacity style={styles.button}>
       <Icon
         style={{
           backgroundColor: props.bgcolor,
@@ -13,7 +13,7 @@ const IconButton = props => {
           padding: 5,
         }}
         name={props.name}
-        size={30}
+        size={20}
         color={props.color}
       />
     </TouchableOpacity>
