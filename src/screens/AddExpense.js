@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  Button,
   View,
   TouchableWithoutFeedback,
   Keyboard,
@@ -13,8 +12,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../reducers/expensesSlice";
-// import DateTimePicker from '@react-native-community/datetimepicker';
-
+import { colors } from "../styles/Colors";
+import Button from "../components/Button"
 export default function AddExpense() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
@@ -35,7 +34,7 @@ export default function AddExpense() {
             title: "",
             cost: "",
             category: "",
-            date: new Date(),
+            date: "20/54",
           }}
           onSubmit={(values, actions) => {
             actions.resetForm();
@@ -67,7 +66,7 @@ export default function AddExpense() {
                 placeholder="Expense Title"
               />
               {touched.title && errors.title && (
-                <Text style={{ fontSize: 11, color: "red", marginBottom: 15 }}>
+                <Text style={{ fontSize: 14, color: colors.info, marginBottom: 15 }}>
                   {errors.title}
                 </Text>
               )}
@@ -80,7 +79,7 @@ export default function AddExpense() {
                 placeholder="Enter your cost"
               />
               {touched.cost && errors.cost && (
-                <Text style={{ fontSize: 11, color: "red" }}>
+                <Text style={{ fontSize: 14, color: colors.info }}>
                   {errors.cost}
                 </Text>
               )}
@@ -121,5 +120,7 @@ const styles = StyleSheet.create({
   },
   mainWrapper: {
     padding: 40,
+    backgroundColor: colors.secondary,
+    flex: 1
   },
 });

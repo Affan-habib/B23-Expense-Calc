@@ -11,11 +11,12 @@ import Expenses from "./src/screens/Expenses";
 import AddExpense from "./src/screens/AddExpense";
 import AddCategory from "./src/screens/AddCategory";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { colors } from "./src/styles/globalStyles";
+import { colors } from "./src/styles/Colors";
 import { Provider } from "react-redux";
 import { store } from "./src/reducers/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import Home from "./src/screens/Home";
 let persistor = persistStore(store);
 const Tab = createBottomTabNavigator();
 function CustomDrawerContent(props) {
@@ -34,6 +35,7 @@ function MyDrawer() {
       useLegacyImplementation
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
+      <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Expenses" component={Expenses} />
       <Drawer.Screen name="Categories" component={AddCategory} />
       <Drawer.Screen name="AddExpense" component={AddExpense} />

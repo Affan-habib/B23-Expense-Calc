@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   Alert,
-  Button,
   View,
   TouchableWithoutFeedback,
   Keyboard,
@@ -13,6 +12,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../reducers/categoriesSlice";
+import { colors } from "../styles/Colors";
+import Button from "../components/Button";
 // import { TouchableWithoutFeedback } from "react-native-web";
 // import Categories from "./Categories";
 
@@ -21,7 +22,7 @@ export default function AddCategory() {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View>
+      <View style={{backgroundColor: colors.secondary, flex: 1}}>
         <Formik
           initialValues={{
             name: "",
@@ -55,7 +56,7 @@ export default function AddCategory() {
                 placeholder="Category Name"
               />
               {touched.name && errors.name && (
-                <Text style={{ fontSize: 11, color: "red" }}>
+                <Text style={{ fontSize: 14, color: colors.info }}>
                   {errors.name}
                 </Text>
               )}

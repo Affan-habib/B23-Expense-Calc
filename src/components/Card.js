@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { colors } from "../styles/globalStyles";
+import { colors } from "../styles/Colors";
 
 const Card = (props) => {
   return (
@@ -8,35 +8,35 @@ const Card = (props) => {
       <Text
         style={[
           styles.title,
-          { backgroundColor: props.bgcolor || colors.primary },
+          { backgroundColor: props.bgcolor || colors.info },
         ]}
       >
         {props.title}
       </Text>
-      <Text style={styles.body}>{props.body}</Text>
+      <Text style={styles.body}>{props.category}</Text>
+      <Text style={styles.body}>{props.date}</Text>
+      <Text style={styles.body}>{props.cost}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 10,
+    // borderRadius: 10,
     margin: 10,
-    backgroundColor: "#F9F9F9" ,
-    // paddingVertical: 10,
-    // paddingHorizontal: 15,
+    backgroundColor: "#F9F9F9",
+    flex:1/2,
   },
   title: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    fontSize: 16,
+    color: "white",
     backgroundColor: colors.danger,
-    padding: 15,
+    padding: 10,
   },
   body: {
-    margin: 20,
-    fontSize: 18,
+    margin: 5,
+    fontSize: 14,
+    color: colors.pr
   },
 });
 
