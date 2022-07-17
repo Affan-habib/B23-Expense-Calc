@@ -3,16 +3,17 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  
+  Button,
   View,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../reducers/expensesSlice";
-import Button from "../components/Button";
+// import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddExpense() {
   const dispatch = useDispatch();
@@ -27,13 +28,14 @@ export default function AddExpense() {
     pickerRef.current.blur();
   }
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.mainWrapper}>
         <Formik
           initialValues={{
             title: "",
-            cost: undefined,
-            category: undefined,
+            cost: "",
+            category: "",
+            date: new Date(),
           }}
           onSubmit={(values, actions) => {
             actions.resetForm();
@@ -82,7 +84,7 @@ export default function AddExpense() {
                   {errors.cost}
                 </Text>
               )}
-              {/* <Picker
+              <Picker
                 ref={pickerRef}
                 selectedValue={values.category}
                 mode="dropdown"
@@ -95,7 +97,7 @@ export default function AddExpense() {
                 {categories.map((c, index) => (
                   <Picker.Item key={index} label={c} value={c} />
                 ))}
-              </Picker> */}
+              </Picker>
               <Button
                 color="#00669a"
                 title="Save"

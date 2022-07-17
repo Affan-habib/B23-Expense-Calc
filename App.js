@@ -1,76 +1,54 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Expenses from "./src/screens/Expenses";
-import Categories from "./src/screens/Categories";
 import AddExpense from "./src/screens/AddExpense";
+import AddCategory from "./src/screens/AddCategory";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "./src/styles/globalStyles";
 import { Provider } from "react-redux";
-import { store } from './src/reducers/store';
+import { store } from "./src/reducers/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+let persistor = persistStore(store);
 const Tab = createBottomTabNavigator();
-
-function MyTabs() {
+function CustomDrawerContent(props) {
   return (
-    <Tab.Navigator
-      initialRouteName="Expenses"
-      headerMode="float"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: colors.secondary,
-        },
-        headerTitleStyle: {
-          color: "white",
-          alignItems: "center",
-        },
-      }}
-      tabBarOptions={{
-        activeTintColor: "white",
-        inactiveTintColor: colors.light,
-        activeBackgroundColor: colors.secondary,
-        inactiveBackgroundColor: colors.secondary,
-      }}
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+console.log(new Date())
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+      useLegacyImplementation
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Tab.Screen
-        name="Expenses"
-        options={{
-          tabBarLabel: "Expenses",
-          tabBarIcon: ({ color }) => (
-            <Icon name="nfc" size={25} color={color} />
-          ),
-        }}
-        component={Expenses}
-      />
-      <Tab.Screen
-        name="Categories"
-        options={{
-          tabBarLabel: "Categories",
-          tabBarIcon: ({ color }) => (
-            <Icon name="child-friendly" size={25} color={color} />
-          ),
-        }}
-        component={Categories}
-      />
-      <Tab.Screen
-        name="AddExpense"
-        options={{
-          tabBarLabel: "AddExpense",
-          tabBarIcon: ({ color }) => (
-            <Icon name="nfc" size={25} color={color} />
-          ),
-        }}
-        component={AddExpense}
-      />
-    </Tab.Navigator>
+      <Drawer.Screen name="Expenses" component={Expenses} />
+      <Drawer.Screen name="Categories" component={AddCategory} />
+      <Drawer.Screen name="AddExpense" component={AddExpense} />
+    </Drawer.Navigator>
   );
 }
 
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <MyDrawer />
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }

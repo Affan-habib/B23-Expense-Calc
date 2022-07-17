@@ -1,62 +1,92 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+} from "react-native";
+import React from "react";
 import { useSelector } from "react-redux";
-import { globalStyles, colors } from "../styles/globalStyles";
-// import { useToast } from "react-native-toast-notifications";
-import Button from "../components/Button";
-import Card from "../components/Card";
-
-const Expenses = (props) => {
-  const expenses = useSelector((state) => state.expenses);
-
-  return (
-    <ScrollView style={styles.container}>
-      <View style={styles.list}>
-        <Card
-          title="Brainstation23"
-          body="Hello body lorem30 HHello body lorem30ello body lorem30Hello body lorem30Hello body lorem30"
-        />
-        <Card
-          bgcolor={colors.danger}
-          title="Brainstation23"
-          body="Hello body lorem30 HHello body lorem30ello body lorem30Hello body lorem30Hello body lorem30"
-        />
-        <Card
-          bgcolor={colors.primary}
-          title="Brainstation23"
-          body="Hello body lorem30 HHello body lorem30ello body lorem30Hello body lorem30Hello body lorem30"
-        />
-        <Card
-          bgcolor={colors.info}
-          title="Brainstation23"
-          body="Hello body lorem30 HHello body lorem30ello body lorem30Hello body lorem30Hello body lorem30"
-        />
-        <Card
-          bgcolor={colors.danger}
-          title="Brainstation23"
-          body="Hello body lorem30 HHello body lorem30ello body lorem30Hello body lorem30Hello body lorem30"
-        >
-          <Card
-            bgcolor={colors.info}
-            title="Brainstation23"
-            body="Hello bodyrem30Hello body lorem30Hello body lorem30"
-          />
-        </Card>
-        <Button title="photos" onPress={() => navigation.navigate("Gallery")} />
+const Item = ({ title, category, cost , date}) => (
+  <View style={styles.itemContainer}>
+    <View style={{ flexDirection: "row" }}>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.title}>{title}</Text>
       </View>
-    </ScrollView>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.cost}>৳  {cost}</Text>
+      </View>
+    </View>
+    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <Text style={styles.date}>Date: {date}</Text>
+      <Text style={styles.category}>Category:{category}</Text>
+    </View>
+  </View>
+);
+export default function ExpnseList() {
+  const expenses = useSelector((state) => state.expenses);
+  //   console.log(expenses);
+  const renderItem = ({ item }) => (
+    <Item
+      key={item.id}
+      title={item.title}
+      category={item.category}
+      date={item.date}
+      cost={item.cost}
+    />
   );
-};
-
+  return (
+    <View>
+      <Text style={styles.list}>Expense List</Text>
+        <FlatList
+          data={expenses}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+    </View>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  itemContainer: {
+    backgroundColor: "#eaebec",
+    borderRadius: 4,
+    margin: 5,
     padding: 20,
-    backgroundColor: colors.secondary,
   },
-  list: {
-    marginBottom: 40,
+  item: {
+    backgroundColor: "red",
+    padding: 2,
+    marginVertical: 2,
+    marginHorizontal: 16,
   },
+  title: {
+    fontSize: 16,
+    color: "#00669a",
+  },
+  cost: {
+    fontSize: 16,
+    alignSelf: "flex-end",
+    color: "#00669a",
+  },
+  date: {
+    fontSize: 14,
+    color: "#00669a",
+  },
+  category: {
+    fontSize: 14,
+    color: "#b39a60",
+  },
+  list : {
+    fontSize: 20,
+    textAlign: 'center',
+    borderRadius: 4,
+    padding: 5,
+    margin: 10,
+    backgroundColor: '#00669a',
+    color: "white",
+  }
 });
-
-export default Expenses;

@@ -4,24 +4,14 @@ let nextExpenseId = 40;
 
 const expensesSlice = createSlice({
   name: "expenses",
-  initialState: [
-    {id:1, title: "Laptop", category: "shopping", date: "22/12/2022", cost: 70000 },
-    {
-      id:2,
-      title: "Grocery items",
-      category: "shopping",
-      date: "22/12/2022",
-      cost: 1000,
-    },
-    { id:3,title: "T-shirt", category: "shopping", date: "22/12/2022", cost: 650 },
-  ],
+  initialState: [],
   reducers: {
     addExpense(state, action) {
       state.push({
-        id: nextExpenseId++,
+        id: new Date(),
         title: action.payload.title,
-        date: '225',
         cost: parseInt(action.payload.cost),
+        date: action.payload.date,
         category: action.payload.category,
       });
     },
