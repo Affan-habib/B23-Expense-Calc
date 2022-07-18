@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
-
-today = mm + '/' + dd + '/' + yyyy;
+import moment from "moment";
 
 const expensesSlice = createSlice({
   name: "expenses",
@@ -13,10 +7,10 @@ const expensesSlice = createSlice({
   reducers: {
     addExpense(state, action) {
       state.push({
-        id: new Date(),
+        id: moment(action.payload.date).format(),
         title: action.payload.title,
         cost: parseInt(action.payload.cost),
-        date: action.payload.date,
+        date: moment(action.payload.date).format('DD-MMMM-YYYY'),
         category: action.payload.category,
       });
     },

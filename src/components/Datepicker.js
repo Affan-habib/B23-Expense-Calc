@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, Button } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { colors } from "../styles/Colors";
 
 const Datepicker = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [datePickerVisible, setDatePickerVisible] = useState(false);
-
   const showDatePicker = () => {
     setDatePickerVisible(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisible(false);
-  };
-
-  const handleConfirm = (date) => {
-    hideDatePicker();
-    setSelectedDate(date);
   };
 
   return (
@@ -24,27 +22,38 @@ const Datepicker = () => {
       <View
         style={{
           padding: 20,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          
         }}
       >
-        <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>
-          {selectedDate
-            ? selectedDate.toLocaleDateString()
-            : "No date selected"}
-        </Text>
-        <Button title="Select a date" onPress={showDatePicker} />
+        <TouchableOpacity onPress={showDatePicker}>
+          <Text style={{ fontSize: 16, marginBottom: 10 }}>Select Date</Text>
+          <Text style={styles.inputBox}>
+            {selectedDate
+              ? selectedDate.toLocaleDateString()
+              : "No date selected"}
+          </Text>
+        </TouchableOpacity>
         <DateTimePickerModal
           date={selectedDate}
           isVisible={datePickerVisible}
           mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
+          onConfirm={(date) => {
+            setDatePickerVisible(false);
+            setSelectedDate(date);
+          }}
+          onCancel={() => setDatePickerVisible(false)}
         />
       </View>
     </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  inputBox: {
+    padding: 10,
+    borderColor: colors.primary,
+    borderWidth: 1,
+    marginBottom: 10,
+    backgroundColor: "white",
+  },
+});
 export default Datepicker;

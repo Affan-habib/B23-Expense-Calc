@@ -25,7 +25,7 @@ const Card = (props) => {
       </View>
       <View style={{flexDirection: "row"}}>
         <IconButton name="date-range" color={colors.info}/>
-        <Text style={styles.body}>{moment(props.date).format('DD-MMMM-YYYY')}</Text>
+        <Text style={styles.body}>{props.date}</Text>
       </View>
     </View>
   );

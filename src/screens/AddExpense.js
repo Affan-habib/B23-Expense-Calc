@@ -158,10 +158,10 @@ export default function AddExpense() {
                     date={values.date}
                     isVisible={datePickerVisible}
                     mode="date"
-                    onChange={(date) => setFieldValue("date", date)}
+                    // onChange={(date) => setFieldValue("date", date)}
                     onConfirm={(date) => {
                       hideDatePicker();
-                      // setFieldValue("date", date);
+                      setFieldValue("date", date);
                     }}
                     onCancel={hideDatePicker}
                   />
