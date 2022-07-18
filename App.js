@@ -4,22 +4,17 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Expenses from "./src/screens/Expenses";
 import AddExpense from "./src/screens/AddExpense";
 import AddCategory from "./src/screens/AddCategory";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { colors } from "./src/styles/Colors";
 import { Provider } from "react-redux";
 import { store } from "./src/reducers/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import Home from "./src/screens/Home";
-import Datepicker from './src/components/Datepicker'
 let persistor = persistStore(store);
-const Tab = createBottomTabNavigator();
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -27,7 +22,7 @@ function CustomDrawerContent(props) {
     </DrawerContentScrollView>
   );
 }
-console.log(new Date())
+console.log(new Date());
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
@@ -40,7 +35,6 @@ function MyDrawer() {
       <Drawer.Screen name="Expenses" component={Expenses} />
       <Drawer.Screen name="Categories" component={AddCategory} />
       <Drawer.Screen name="AddExpense" component={AddExpense} />
-      <Drawer.Screen name="Datepicker" component={Datepicker} />
     </Drawer.Navigator>
   );
 }
