@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, Button } from "react-native";
+import { SafeAreaView, View, Text, Button, TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const Datepicker = () => {
@@ -34,7 +34,10 @@ const Datepicker = () => {
             ? selectedDate.toLocaleDateString()
             : "No date selected"}
         </Text>
-        <Button title="Select a date" onPress={showDatePicker} />
+        <TouchableOpacity onPress={showDatePicker}>
+            {selectedDate}
+        </TouchableOpacity>
+        <Button title="Start date" onPress={showDatePicker} />
         <DateTimePickerModal
           date={selectedDate}
           isVisible={datePickerVisible}

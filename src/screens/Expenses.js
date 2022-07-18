@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import Card from "../components/Card";
 import { colors } from "../styles/Colors";
 import { Picker } from "@react-native-picker/picker";
+import { useIsFocused } from "@react-navigation/native";
+
 const Item = ({ item }) => (
   <Card
     key={item.id}
@@ -14,6 +16,8 @@ const Item = ({ item }) => (
   />
 );
 export default function ExpnseList() {
+  const isFocused = useIsFocused();
+
   const expenses = useSelector((state) => state.expenses);
   const categories = useSelector((state) => state.categories);
   const [data, setData] = useState(expenses);
@@ -27,7 +31,6 @@ export default function ExpnseList() {
   function close() {
     pickerRef.current.blur();
   }
-  console.log(category);
   useEffect(() => {
     if (category == "All") {
       setData(expenses);
@@ -37,7 +40,7 @@ export default function ExpnseList() {
       );
       setData(filteredExpense);
     }
-  }, [category]);
+  }, [category, isFocused]);
   return (
     <View style={{ backgroundColor: colors.secondary, padding: 10, flex: 1 }}>
       <Text style={{ fontSize: 16, marginLeft: 10, fontWeight: "bold" }}>
@@ -48,7 +51,10 @@ export default function ExpnseList() {
         selectedValue={category}
         mode="dropdown"
         style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setCategory(itemValue)}
+        onValueChange={(itemValue, itemIndex) => {
+          close();
+          setCategory(itemValue);
+        }}
         placeholder="Select Category"
       >
         <Picker.Item label="All" value="All" />

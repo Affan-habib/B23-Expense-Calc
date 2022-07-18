@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors } from "../styles/Colors";
@@ -24,7 +25,7 @@ const Card = (props) => {
       </View>
       <View style={{flexDirection: "row"}}>
         <IconButton name="date-range" color={colors.info}/>
-        <Text style={styles.body}>{props.date  || "Not found"}</Text>
+        <Text style={styles.body}>{moment(props.date).format('DD-MMMM-YYYY')}</Text>
       </View>
     </View>
   );
