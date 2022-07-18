@@ -46,19 +46,24 @@ export default function ExpnseList() {
     pickerRef.current.blur();
   }
   useEffect(() => {
-    if (category == "All" && selectedDate) {
+    if (category == "All" && selectedDate == null) {
       setData(expenses);
-    } else if (category == "All" && selectedDate !== null) {
+    } else if (category == "All" && selectedDate != null) {
       const filteredExpense = expenses.filter(
         (expenses) =>
           expenses.date == moment(selectedDate).format("DD-MMMM-YYYY")
       );
       setData(filteredExpense);
+    } else if (category != "All" && selectedDate == null) {
+      const filteredExpense = expenses.filter(
+        (expenses) => expenses.category == category
+      );
+      setData(filteredExpense);
     } else {
       const filteredExpense = expenses.filter(
         (expenses) =>
-          (expenses.category == category) &&
-          (expenses.date == moment(selectedDate).format("DD-MMMM-YYYY"))
+          expenses.category == category &&
+          expenses.date == moment(selectedDate).format("DD-MMMM-YYYY")
       );
       setData(filteredExpense);
     }
